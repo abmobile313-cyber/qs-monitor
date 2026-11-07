@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.quranicscience.qsmonitor'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.quranicscience.qsmonitor'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        qs {
+            storeFile file('qs-monitor.keystore')
+            storePassword 'qsmonitor123'
+            keyAlias 'qs'
+            keyPassword 'qsmonitor123'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.qs
+        }
+        debug {
+            signingConfig signingConfigs.qs
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
